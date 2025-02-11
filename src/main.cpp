@@ -14,7 +14,7 @@
 #include <lvgl.h>
 #include <TFT_eSPI.h> // Graphics and font library for ST7735 driver chip
 #include <SPI.h>
-
+#include "lv_porting.h"
  
  
 
@@ -96,6 +96,8 @@ void setup() {
   // 初始化串口，用于调试
   Serial.begin(115200);
   delay(3000);
+  lv_porting_init();
+#if 0
   Serial.print("aaaaaaaa\r\n");
  if(LittleFS.begin()){
     
@@ -160,8 +162,8 @@ void setup() {
 
 
 
-   i2c_manager_read(I2C_MASTER_NUM,0x0d, 0x0d, &id, 1);
-   printf("qmi5883 id : 0x%x\r\n",id);
+    i2c_manager_read(I2C_MASTER_NUM,0x0d, 0x0d, &id, 1);
+    printf("qmi5883 id : 0x%x\r\n",id);
 
     i2c_manager_only_read(I2C_MASTER_NUM,0X20, &id, 1);
     printf("fpc85741 id : 0x%x\r\n",id);
@@ -186,6 +188,7 @@ void setup() {
     myLED.setPixel( 0, L_GREEN, 1 );    // set the LED colour and show it
     delay( 2000 );
     myLED.brightness( 0, 1 );           // turn the LED off
+#endif
   // 从URL获取MP3文件并播放
   //file = new AudioFileSourceSPIFFS("/1.wav");
  // wav = new AudioGeneratorWAV();
@@ -203,7 +206,7 @@ void loop() {
   }
   */ 
  
- lv_timer_handler(); /* let the GUI do its work */
+ //lv_timer_handler(); /* let the GUI do its work */
   
  //myLED.brightness( 0, 1 );  
   delay(10);
