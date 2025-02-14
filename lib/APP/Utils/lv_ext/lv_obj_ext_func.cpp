@@ -126,7 +126,8 @@ lv_indev_t* lv_get_indev(lv_indev_type_t type)
         {
             break;
         }
-        if (cur_indev->type == type)
+
+        if (cur_indev->driver->type == type)
         {
             return cur_indev;
         }

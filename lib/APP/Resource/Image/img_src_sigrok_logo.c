@@ -117,7 +117,7 @@ const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_IMG_SRC_S
 };
 
 const lv_img_dsc_t img_src_sigrok_logo = {
-   
+  .header.always_zero = 0,
   .header.w = 100,
   .header.h = 100,
   .data_size = 10000 * LV_IMG_PX_SIZE_ALPHA_BYTE,

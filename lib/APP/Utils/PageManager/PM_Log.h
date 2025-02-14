@@ -23,9 +23,9 @@
 #ifndef __PM_LOG_H
 #define __PM_LOG_H
 
-#define PAGE_MANAGER_USE_LOG 1
+#define PAGE_MANAGER_USE_LOG 0
 
-#if  PAGE_MANAGER_USE_LOG
+#if !defined(ARDUINO) && PAGE_MANAGER_USE_LOG
 #include <stdio.h>
 #  define _PM_LOG(format, ...)      printf("[PM]" format "\r\n", ##__VA_ARGS__)
 #  define PM_LOG_INFO(format, ...)  _PM_LOG("[Info] " format, ##__VA_ARGS__)

@@ -1461,7 +1461,7 @@ const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_IMG_IMG_SRC_BATTERY_RED uint8_t img_sr
 };
 
 const lv_img_dsc_t img_src_battery_red = {
-     
+    .header.always_zero = 0,
     .header.w = 8,
     .header.h = 15,
     .data_size = 120 * LV_IMG_PX_SIZE_ALPHA_BYTE,

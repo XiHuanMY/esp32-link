@@ -73,7 +73,7 @@ const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_IMG_IMG_SRC_WIFI_CONNECT uint8_t img_s
 };
 
 const lv_img_dsc_t img_src_wifi_connect = {
-   
+  .header.always_zero = 0,
   .header.w = 13,
   .header.h = 13,
   .data_size = 169 * LV_IMG_PX_SIZE_ALPHA_BYTE,

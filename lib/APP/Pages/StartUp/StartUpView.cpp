@@ -11,10 +11,6 @@ using namespace Page;
 
 void StartupView::Create(lv_obj_t *root)
 {
-
- 
-
- 
         lv_obj_remove_style_all(root);
         lv_obj_set_size(root, LV_HOR_RES, LV_VER_RES);
 
@@ -24,8 +20,7 @@ void StartupView::Create(lv_obj_t *root)
         lv_obj_clear_flag(cont_bg, LV_OBJ_FLAG_SCROLLABLE); /// Flags
         lv_obj_set_style_border_opa(root, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_set_style_bg_img_src(cont_bg, ResourcePool::GetImage("catb"), LV_PART_MAIN | LV_STATE_DEFAULT);
-        lv_obj_set_style_bg_image_opa(cont_bg, 64, LV_PART_MAIN | LV_STATE_DEFAULT);
-         
+        lv_obj_set_style_bg_img_opa(cont_bg, 64, LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_center(cont_bg);
 
         lv_obj_t *cont = lv_obj_create(root);
@@ -59,15 +54,13 @@ void StartupView::Create(lv_obj_t *root)
                 LV_ANIM_TIMELINE_WRAPPER_END};
 
         lv_anim_timeline_add_wrapper(ui.anim_timeline, wrapper);
-        
 }
 
 void StartupView::Delete()
 {
     if (ui.anim_timeline)
     {
-        //lv_anim_timeline_destroy(ui.anim_timeline);
-        lv_anim_timeline_delete(ui.anim_timeline);
+        lv_anim_timeline_del(ui.anim_timeline);
         ui.anim_timeline = nullptr;
     }
 }

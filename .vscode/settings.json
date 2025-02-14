@@ -308,6 +308,9 @@
     "type_traits": "c",
     "utility": "c",
     "algorithm": "cpp",
-    "*.tcc": "cpp"
-  }
+    "*.tcc": "cpp",
+    "gpio.h": "c",
+    "pcnt.h": "c",
+    "cstddef": "cpp"
+}
 }

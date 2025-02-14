@@ -41,7 +41,7 @@ const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_IMG_SRC_A
 };
 
 const lv_img_dsc_t img_src_alt_ldown = {
-   
+  .header.always_zero = 0,
   .header.w = 24,
   .header.h = 24,
   .data_size = 576 * LV_IMG_PX_SIZE_ALPHA_BYTE,

@@ -216,9 +216,9 @@ PageBase::State_t PageManager::StateUnloadExecute(PageBase* base)
     if (base->priv.Stash.ptr != nullptr && base->priv.Stash.size != 0)
     {
         PM_LOG_INFO("Page(%s) free stash(0x%p)[%d]", base->Name, base->priv.Stash.ptr, base->priv.Stash.size);
-        lv_free(base->priv.Stash.ptr);
+        lv_mem_free(base->priv.Stash.ptr);
         base->priv.Stash.ptr = nullptr;
-        base->priv.Stash.size = 0; 
+        base->priv.Stash.size = 0;
     }
     lv_obj_del_async(base->root);
     base->root = nullptr;

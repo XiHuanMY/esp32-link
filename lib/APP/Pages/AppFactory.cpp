@@ -21,9 +21,9 @@
  * SOFTWARE.
  */
 #include "AppFactory.hpp"
+#include "_Template/Template.h"
 #include "StartUp/StartUp.h"
-//#include "StartUp/StartUp.h"
-/*#include "IICDiscovery/IICDiscovery.h"
+#include "IICDiscovery/IICDiscovery.h"
 #include "Pages/AppInfos/AppInfos.h"
 #include "Pages/AppLumia/AppLumia.h"
 #include "Pages/PowerSupply/PowerSupply.h"
@@ -39,7 +39,7 @@
 #include "Pages/KaitoKey/KaitoKey.h"
 #include "Pages/LogicAnalyzer/LogicAnalyzer.h"
 #include "Pages/PowerList/PowerList.h"
-*/
+
 #define APP_CLASS_MATCH(className)\
 do{\
     if (strcmp(name, #className) == 0)\
@@ -50,10 +50,10 @@ do{\
 
 PageBase *AppFactory::CreatePage(const char *name)
 {
-     APP_CLASS_MATCH(Startup);
-  /*  APP_CLASS_MATCH(Startup);
+    APP_CLASS_MATCH(Template);
+    APP_CLASS_MATCH(Startup);
 
-   APP_CLASS_MATCH(AppInfos);
+    APP_CLASS_MATCH(AppInfos);
     APP_CLASS_MATCH(AppLumia);
     APP_CLASS_MATCH(IICDiscovery);
     APP_CLASS_MATCH(PowerSupply);
@@ -69,6 +69,6 @@ PageBase *AppFactory::CreatePage(const char *name)
     APP_CLASS_MATCH(KaitoKey);
     APP_CLASS_MATCH(LogicAnalyzer);
     APP_CLASS_MATCH(PowerList);
-*/
+
     return nullptr;
 }

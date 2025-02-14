@@ -173,7 +173,7 @@ const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_IMG_SRC_S
 };
 
 const lv_img_dsc_t img_src_storage = {
-   
+  .header.always_zero = 0,
   .header.w = 33,
   .header.h = 36,
   .data_size = 1188 * LV_IMG_PX_SIZE_ALPHA_BYTE,

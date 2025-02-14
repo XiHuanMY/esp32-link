@@ -74,7 +74,7 @@ bool PageManager::Replace(const char *name, const PageBase::Stash_t *stash)
     /* Push into the stack */
     PageStack.push(base);
 
-    PM_LOG_INFO("Page(%s) replace Page(%s) (stash = 0x%p)", name, top->Name, stash);
+    PM_LOG_INFO("Page(%s) replace Page(%s) (stash = 0x%p)", name, top->_Name, stash);
 
     /* Page switching execution */
     SwitchTo(base, true, stash);
@@ -204,7 +204,7 @@ void PageManager::SwitchTo(PageBase* newNode, bool isPushAct, const PageBase::St
 
         if (newNode->priv.Stash.ptr == nullptr)
         {
-            buffer = lv_realloc(NULL,stash->size);
+            buffer = lv_mem_alloc(stash->size);
             if (buffer == nullptr)
             {
                 PM_LOG_ERROR("stash malloc failed");
@@ -270,8 +270,7 @@ void PageManager::SwitchTo(PageBase* newNode, bool isPushAct, const PageBase::St
     if (AnimState.IsPushing)
     {
         PM_LOG_INFO("Page PUSH is detect, move Page(%s) to foreground", PageCurrent->Name);
-        if (PagePrev)
-            lv_obj_move_foreground(PagePrev->root);
+        if (PagePrev)lv_obj_move_foreground(PagePrev->root);
         lv_obj_move_foreground(PageCurrent->root);
     }
     else

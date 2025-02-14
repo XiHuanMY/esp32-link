@@ -98,7 +98,7 @@ const LV_ATTRIBUTE_MEM_ALIGN uint8_t img_src_finding_data[] = {
     
 };
 const lv_img_dsc_t img_src_finding = {
-     
+    .header.always_zero = 0,
     .header.w = 72,
     .header.h = 72,
     .data_size = sizeof(img_src_finding_data),

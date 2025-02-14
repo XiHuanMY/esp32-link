@@ -73,7 +73,7 @@ const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_IMG_SRC_O
 };
 
 const lv_img_dsc_t img_src_origin_point = {
-   
+  .header.always_zero = 0,
   .header.w = 11,
   .header.h = 11,
   .data_size = 121 * LV_IMG_PX_SIZE_ALPHA_BYTE,

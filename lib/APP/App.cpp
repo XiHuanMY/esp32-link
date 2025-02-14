@@ -20,7 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#include <Arduino.h>
 #include <cstdio>
 #include "Config/Config.h"
 
@@ -29,10 +28,8 @@
 #include "Utils/PageManager/PageManager.h"
 
 #include "Pages/AppFactory.hpp"
-#include "Pages/StartUp/StartUp.h"
-//#include "Pages/AppLumia/AppLumia.h"
-//#include "Pages/StatusBar/StatusBar.h"
-/*#include "Pages/IICDiscovery/IICDiscovery.h"
+#include "Pages/StatusBar/StatusBar.h"
+#include "Pages/IICDiscovery/IICDiscovery.h"
 #include "Pages/AppInfos/AppInfos.h"
 #include "Pages/AppLumia/AppLumia.h"
 #include "Pages/PowerSupply/PowerSupply.h"
@@ -48,8 +45,14 @@
 #include "Pages/KaitoKey/KaitoKey.h"
 #include "Pages/LogicAnalyzer/LogicAnalyzer.h"
 #include "Pages/PowerList/PowerList.h"
-*/
- 
+
+#if CONFIG_MAP_PNG_DECODE_ENABLE
+#include "Utils/lv_lib_png/lv_png.h"
+#endif
+
+#if CONFIG_MONKEY_TEST_ENABLE
+#include "Utils/lv_monkey/lv_monkey.h"
+#endif
 
 #define ACCOUNT_SEND_CMD(ACT, CMD)                                         \
     do                                                                     \
@@ -65,21 +68,38 @@
 {
     static AppFactory factory;
     static PageManager manager(&factory);
- 
+
+#if CONFIG_MAP_PNG_DECODE_ENABLE
+    lv_png_init();
+#endif
+
+#if CONFIG_MONKEY_TEST_ENABLE
+    lv_monkey_config_t config;
+    lv_monkey_config_init(&config);
+    config.type = CONFIG_MONKEY_INDEV_TYPE;
+    config.time.min = CONFIG_MONKEY_TIME_MIN;
+    config.time.max = CONFIG_MONKEY_TIME_MAX;
+    config.input_range.min = CONFIG_MONKEY_INPUT_RANGE_MIN;
+    config.input_range.max = CONFIG_MONKEY_INPUT_RANGE_MAX;
+    lv_monkey_create(&config);
+    LV_LOG_WARN("lv_monkey test started!");
+#endif
+
     DataProc_Init();
+
     lv_obj_t *scr = lv_scr_act();
     lv_obj_remove_style_all(scr);
     // Disable all widgets scroll are IMPORTANT!!!
     lv_obj_clear_flag(scr, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_clear_flag(scr, LV_OBJ_FLAG_GESTURE_BUBBLE);
-    //lv_disp_set_bg_color(lv_disp_get_default(), lv_color_black());
+    lv_disp_set_bg_color(lv_disp_get_default(), lv_color_black());
+
     ResourcePool::Init();
-    //StatusBar::Init(lv_layer_top());
-    //manager.Install("Template", "Pages/_Template");
-    manager.Install("Startup", "Pages/Startup");
+
+    StatusBar::Init(lv_layer_top());
     // Lưu ý cần đúng tên class, sai tên load không ra, không chạy
- /*   manager.Install("Startup", "Pages/Startup");
-   manager.Install("Template", "Pages/_Template");
+    manager.Install("Startup", "Pages/Startup");
+    manager.Install("Template", "Pages/_Template");
     manager.Install("IICDiscovery", "Pages/IICDiscovery");
     manager.Install("AppInfos", "Pages/AppInfos");
     manager.Install("AppLumia", "Pages/AppLumia");
@@ -96,9 +116,10 @@
     manager.Install("KaitoKey", "Pages/KaitoKey");
     manager.Install("LogicAnalyzer", "Pages/LogicAnalyzer");
     manager.Install("PowerList", "Pages/PowerList");
-*/
-   // manager.SetGlobalLoadAnimType(PageManager::LOAD_ANIM_OVER_TOP, 500);
-     manager.Push("Pages/Startup");
+
+    manager.SetGlobalLoadAnimType(PageManager::LOAD_ANIM_OVER_TOP, 500);
+
+    manager.Push("Pages/Startup");
 }
 
 extern "C" void App_Uninit()
