@@ -230,9 +230,9 @@ void AppLumiaView::CreateItemCell(const char *app_src, lv_obj_t *parent, const c
     item->labelInfo = label;
     lv_label_set_text(label, name);
     lv_obj_center(label);
-    lv_obj_set_align(label, LV_ALIGN_BOTTOM_LEFT);
-    lv_obj_set_x(label, -18);
-    lv_obj_set_y(label, 12);
+    lv_obj_set_align(label, LV_ALIGN_BOTTOM_MID);
+    lv_obj_set_x(label, 0);
+    lv_obj_set_y(label, 6);
     lv_obj_set_style_text_font(label, ResourcePool::GetFont("sf_compact_15"), LV_PART_MAIN | LV_STATE_DEFAULT);
     icon = lv_img_create(obj);
     item->icon = icon;

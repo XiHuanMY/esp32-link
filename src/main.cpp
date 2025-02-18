@@ -86,7 +86,7 @@
  void setup()
  {
     Serial.begin( 115200 ); 
-    delay(3000);
+    
 
     lv_init();
     /*Set a tick source so that LVGL will know how much time elapsed. */
@@ -104,7 +104,7 @@
 
      
     lv_port_indev_init();
-    
+
     Serial.println( "Setup done" );
     App_Init();
   
