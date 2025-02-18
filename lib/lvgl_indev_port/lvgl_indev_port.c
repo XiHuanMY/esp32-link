@@ -1,11 +1,11 @@
 #include "lvgl_indev_port.h"
 
-static void encoder_init(void);
-static void encoder_read(lv_indev_t * indev_drv, lv_indev_data_t * data);
+static void keypad_init(void);
+static void keypad_read(lv_indev_t * indev_drv, lv_indev_data_t * data);
 static void touch_init(void);
 static void touch_read(lv_indev_t * indev_drv, lv_indev_data_t * data);
 
-lv_indev_t *indev_encoder;
+lv_indev_t *indev_keypad;
 lv_indev_t *indev_touch;
 lv_group_t * group;
 
@@ -15,13 +15,13 @@ void lv_port_indev_init(void)
 {
     
 
-    encoder_init();
+    keypad_init();
     touch_init();
 
     /*Register a encoder input device*/
-    indev_encoder = lv_indev_create();
-    lv_indev_set_type(indev_encoder, LV_INDEV_TYPE_ENCODER);
-    lv_indev_set_read_cb(indev_encoder, encoder_read);
+    indev_keypad = lv_indev_create();
+    lv_indev_set_type(indev_keypad, LV_INDEV_TYPE_KEYPAD);
+    lv_indev_set_read_cb(indev_keypad, keypad_read);
 
     /*Register a touch input device*/
     indev_touch = lv_indev_create();
@@ -29,14 +29,14 @@ void lv_port_indev_init(void)
     lv_indev_set_read_cb(indev_touch, touch_read);
 
     group = lv_group_create();
-    lv_indev_set_group(indev_encoder, group);
+    lv_indev_set_group(indev_keypad, group);
     lv_group_set_default(group);
     
 }
 
-static void encoder_init(void)
+static void keypad_init(void)
 {
-    encoder_config();
+   keypad_driver_init(); 
 }
 
 static void touch_init(void)
@@ -64,27 +64,44 @@ static void touch_read(lv_indev_t * indev_drv, lv_indev_data_t * data)
 }
 
 
-static void encoder_read(lv_indev_t * indev_drv, lv_indev_data_t * data)
-{
-    static bool last_state;
-
-    data->enc_diff = encoder_get_diff();
-
-    bool is_push = encoder_get_is_push();
-    data->state = is_push ? LV_INDEV_STATE_PRESSED : LV_INDEV_STATE_RELEASED;
-
-    if(is_push != last_state)
-    {
-        last_state = is_push;
-    }
-}
+ 
 
 lv_indev_t* get_indev(void)
 {
-    return indev_encoder;
+    return indev_keypad;
 }
 
 lv_group_t* get_group(void)
 {
     return group;
 }
+
+static void keypad_read(lv_indev_t * indev_drv, lv_indev_data_t * data)
+{
+    static uint32_t last_key = 0;
+    /*Get whether the a key is pressed and save the pressed key*/
+    uint32_t act_key = keypad_get_key();
+    if(act_key != 0) {
+        data->state = LV_INDEV_STATE_PR;
+        /*Translate the keys to LVGL control characters according to your key definitions*/
+        switch(act_key) {
+            case 1:
+                act_key = LV_KEY_UP;
+                break;
+            case 2:
+                act_key = LV_KEY_DOWN;
+                break;
+            case 3:
+                act_key = LV_KEY_ENTER;
+                break;
+        }
+
+        last_key = act_key;
+    }
+    else {
+        data->state = LV_INDEV_STATE_REL;
+    }
+
+    data->key = last_key;
+}
+ 

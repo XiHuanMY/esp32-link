@@ -30,7 +30,7 @@
 #include "driver/gpio.h"
 
 #define TOUCH_HORIZONTAL_X 240
-#define TOUCH_VERTICAL_Y   280
+#define TOUCH_VERTICAL_Y   320
 
 #define TAG "CST816"
 
@@ -130,8 +130,8 @@ bool cst816_read(lv_indev_t *drv, lv_indev_data_t *data) {
     point_x = ((data_raw[2] & 0xF) << 8) + data_raw[3];
     point_y = ((data_raw[4] & 0xF) << 8) + data_raw[5];
 
-    //point_x = TOUCH_HORIZONTAL_X - point_x;
-    //point_y = TOUCH_VERTICAL_Y - point_y;
+    point_x = TOUCH_HORIZONTAL_X - point_x;
+    point_y = TOUCH_VERTICAL_Y - point_y;
      
     if (points > 0){
         data->state = LV_INDEV_STATE_PR;

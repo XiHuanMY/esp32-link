@@ -6,7 +6,7 @@ extern "C" {
 #endif
 
 #include "lvgl.h"
-#include "encoder.h"
+#include "keypad.h"
 #include "cst816s_touch_driver.h"
 
 void lv_port_indev_init(void);

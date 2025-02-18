@@ -22,7 +22,7 @@
 
  /*Set to your screen resolution and rotation*/
  #define TFT_HOR_RES   240
- #define TFT_VER_RES   280
+ #define TFT_VER_RES   320
  #define TFT_ROTATION  LV_DISPLAY_ROTATION_90
  
  /*LVGL draw into this buffer, 1/10 screen size usually works well. The size is in bytes*/
@@ -87,10 +87,7 @@
  {
     Serial.begin( 115200 ); 
     delay(3000);
-    //App_Init();
 
-
-    //lvgl_i2c_locking(lvgl_i2c_mutex());
     lv_init();
     /*Set a tick source so that LVGL will know how much time elapsed. */
     lv_tick_set_cb(my_tick);
@@ -100,9 +97,6 @@
  #endif
  
     
-
-
-
     lv_display_t * disp;
     /*TFT_eSPI can be enabled lv_conf.h to initialize the display in a simple way*/
     disp = lv_tft_espi_create(TFT_HOR_RES, TFT_VER_RES, draw_buf, sizeof(draw_buf));
@@ -110,29 +104,10 @@
 
      
     lv_port_indev_init();
+    
     Serial.println( "Setup done" );
     App_Init();
   
-      
-        //lv_anim_timeline_add(at, atw->start_time, &a);
-       // ui.labelLogo = label;
-
-        //ui.anim_timeline = lv_anim_timeline_create();
-/*
-    #define ANIM_DEF(start_time, obj, attr, start, end) \
-    {start_time, obj, LV_ANIM_EXEC(attr), start, end, 500, lv_anim_path_ease_out, true}
-
-       lv_anim_timeline_wrapper_t wrapper[] =
-            {
-                ANIM_DEF(0, ui.cont, width, 0, lv_obj_get_style_width(ui.cont, 0)),
-                ANIM_DEF(500, ui.labelLogo, y, lv_obj_get_style_height(ui.cont, 0), lv_obj_get_y(ui.labelLogo)),
-                LV_ANIM_TIMELINE_WRAPPER_END};
-
-        lv_anim_timeline_add_wrapper(ui.anim_timeline, wrapper);
-
- lv_screen_active()
-
-*/
     lvgl_i2c_read(I2C_NUM_0,0x0d, 0x0d, data, 1);
     printf("qmi5883 id : 0x%x\r\n",data[0]);
     lvgl_i2c_read(I2C_NUM_0,0x6a, 0x0f, data, 1);
