@@ -1,67 +1,66 @@
-#include "CandleLight.h"
+#include "LogicAnalyzer.h"
 #include <cstdio>
 
 
 using namespace Page;
 
-CandleLight::CandleLight()
+LogicAnalyzer::LogicAnalyzer()
 {
 }
 
-CandleLight::~CandleLight()
+LogicAnalyzer::~LogicAnalyzer()
 {
 }
 
-void CandleLight::onCustomAttrConfig()
+void LogicAnalyzer::onCustomAttrConfig()
 {
     SetCustomLoadAnimType(PageManager::LOAD_ANIM_OVER_TOP, 500, lv_anim_path_ease_in);
-
-
-
-    
 }
 
-void CandleLight::onViewLoad()
+void LogicAnalyzer::onViewLoad()
 {
-    ////StatusBar::Appear(false);
+    
+    //StatusBar::Appear(false);
     Model.Init();
     View.Create(root);
-
     AttachEvent(root);
+    // AttachEvent(View.switch_cont);
+    Model.LACommand(1); // crash
 }
 
-void CandleLight::onViewDidLoad()
+void LogicAnalyzer::onViewDidLoad()
 {
 }
 
-void CandleLight::onViewWillAppear()
+void LogicAnalyzer::onViewWillAppear()
 {
     lv_obj_set_style_opa(root, LV_OPA_TRANSP, 0);
     lv_obj_fade_in(root, 300, 0);
 }
 
-void CandleLight::onViewDidAppear()
+void LogicAnalyzer::onViewDidAppear()
 {
     
 }
 
-void CandleLight::onViewWillDisappear()
+void LogicAnalyzer::onViewWillDisappear()
 {
     lv_obj_fade_out(root, 300, 0);
 }
 
-void CandleLight::onViewDidDisappear()
+void LogicAnalyzer::onViewDidDisappear()
 {
 }
 
-void CandleLight::onViewDidUnload()
+void LogicAnalyzer::onViewDidUnload()
 {
+    Model.LACommand(0);
     SetCustomLoadAnimType(PageManager::LOAD_ANIM_OVER_BOTTOM, 500, lv_anim_path_ease_in);
     View.Delete();
     Model.Deinit();
 }
 
-void CandleLight::AttachEvent(lv_obj_t *obj)
+void LogicAnalyzer::AttachEvent(lv_obj_t *obj)
 {
     lv_obj_set_user_data(obj, this);
     lv_obj_add_event_cb(obj, onEvent, LV_EVENT_GESTURE, this);
@@ -69,25 +68,31 @@ void CandleLight::AttachEvent(lv_obj_t *obj)
     lv_obj_clear_flag(obj, LV_OBJ_FLAG_SCROLLABLE);
 }
 
-void CandleLight::Update()
+void LogicAnalyzer::Update()
 {
 
 }
 
-void CandleLight::onTimer(lv_timer_t *timer)
+void LogicAnalyzer::onTimer(lv_timer_t *timer)
 {
 
 }
 
+static int value = 0;
+
+void LogicAnalyzer::enableHW(int value)
+{
+    Model.LACommand(value );
+}
 
 
 
-void CandleLight::onEvent(lv_event_t *event)
+void LogicAnalyzer::onEvent(lv_event_t *event)
 {
 
     lv_obj_t *obj = (lv_obj_t *)lv_event_get_target(event);
     lv_event_code_t code = lv_event_get_code(event);
-    CandleLight *instance = (CandleLight *)lv_obj_get_user_data(obj);
+    LogicAnalyzer *instance = (LogicAnalyzer *)lv_obj_get_user_data(obj);
 
     if (obj == instance->root)
     {

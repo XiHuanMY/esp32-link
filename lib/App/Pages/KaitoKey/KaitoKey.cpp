@@ -1,18 +1,18 @@
-#include "CandleLight.h"
+#include "KaitoKey.h"
 #include <cstdio>
 
 
 using namespace Page;
 
-CandleLight::CandleLight()
+KaitoKey::KaitoKey()
 {
 }
 
-CandleLight::~CandleLight()
+KaitoKey::~KaitoKey()
 {
 }
 
-void CandleLight::onCustomAttrConfig()
+void KaitoKey::onCustomAttrConfig()
 {
     SetCustomLoadAnimType(PageManager::LOAD_ANIM_OVER_TOP, 500, lv_anim_path_ease_in);
 
@@ -21,7 +21,7 @@ void CandleLight::onCustomAttrConfig()
     
 }
 
-void CandleLight::onViewLoad()
+void KaitoKey::onViewLoad()
 {
     ////StatusBar::Appear(false);
     Model.Init();
@@ -30,38 +30,38 @@ void CandleLight::onViewLoad()
     AttachEvent(root);
 }
 
-void CandleLight::onViewDidLoad()
+void KaitoKey::onViewDidLoad()
 {
 }
 
-void CandleLight::onViewWillAppear()
+void KaitoKey::onViewWillAppear()
 {
     lv_obj_set_style_opa(root, LV_OPA_TRANSP, 0);
     lv_obj_fade_in(root, 300, 0);
 }
 
-void CandleLight::onViewDidAppear()
+void KaitoKey::onViewDidAppear()
 {
     
 }
 
-void CandleLight::onViewWillDisappear()
+void KaitoKey::onViewWillDisappear()
 {
     lv_obj_fade_out(root, 300, 0);
 }
 
-void CandleLight::onViewDidDisappear()
+void KaitoKey::onViewDidDisappear()
 {
 }
 
-void CandleLight::onViewDidUnload()
+void KaitoKey::onViewDidUnload()
 {
     SetCustomLoadAnimType(PageManager::LOAD_ANIM_OVER_BOTTOM, 500, lv_anim_path_ease_in);
     View.Delete();
     Model.Deinit();
 }
 
-void CandleLight::AttachEvent(lv_obj_t *obj)
+void KaitoKey::AttachEvent(lv_obj_t *obj)
 {
     lv_obj_set_user_data(obj, this);
     lv_obj_add_event_cb(obj, onEvent, LV_EVENT_GESTURE, this);
@@ -69,12 +69,12 @@ void CandleLight::AttachEvent(lv_obj_t *obj)
     lv_obj_clear_flag(obj, LV_OBJ_FLAG_SCROLLABLE);
 }
 
-void CandleLight::Update()
+void KaitoKey::Update()
 {
 
 }
 
-void CandleLight::onTimer(lv_timer_t *timer)
+void KaitoKey::onTimer(lv_timer_t *timer)
 {
 
 }
@@ -82,12 +82,12 @@ void CandleLight::onTimer(lv_timer_t *timer)
 
 
 
-void CandleLight::onEvent(lv_event_t *event)
+void KaitoKey::onEvent(lv_event_t *event)
 {
 
     lv_obj_t *obj = (lv_obj_t *)lv_event_get_target(event);
     lv_event_code_t code = lv_event_get_code(event);
-    CandleLight *instance = (CandleLight *)lv_obj_get_user_data(obj);
+    KaitoKey *instance = (KaitoKey *)lv_obj_get_user_data(obj);
 
     if (obj == instance->root)
     {

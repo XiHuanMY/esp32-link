@@ -28,7 +28,6 @@
 #include "Utils/lv_ext/lv_anim_timeline_wrapper.h"
 #include "Resource/ResourcePool.h"
  
-
 #ifdef LV_LVGL_H_INCLUDE_SIMPLE
 #include "lvgl.h"
 #else

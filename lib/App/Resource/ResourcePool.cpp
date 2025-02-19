@@ -70,6 +70,7 @@ extern "C"
         /* Import Images */
  
         IMPORT_IMG(canbus);
+        //IMPORT_IMG(pin_color_wheel);
         IMPORT_IMG(catb);
     }
 

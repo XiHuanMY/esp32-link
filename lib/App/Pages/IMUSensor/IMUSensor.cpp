@@ -1,18 +1,18 @@
-#include "CandleLight.h"
+#include "IMUSensor.h"
 #include <cstdio>
 
 
 using namespace Page;
 
-CandleLight::CandleLight()
+IMUSensor::IMUSensor()
 {
 }
 
-CandleLight::~CandleLight()
+IMUSensor::~IMUSensor()
 {
 }
 
-void CandleLight::onCustomAttrConfig()
+void IMUSensor::onCustomAttrConfig()
 {
     SetCustomLoadAnimType(PageManager::LOAD_ANIM_OVER_TOP, 500, lv_anim_path_ease_in);
 
@@ -21,7 +21,7 @@ void CandleLight::onCustomAttrConfig()
     
 }
 
-void CandleLight::onViewLoad()
+void IMUSensor::onViewLoad()
 {
     ////StatusBar::Appear(false);
     Model.Init();
@@ -30,38 +30,38 @@ void CandleLight::onViewLoad()
     AttachEvent(root);
 }
 
-void CandleLight::onViewDidLoad()
+void IMUSensor::onViewDidLoad()
 {
 }
 
-void CandleLight::onViewWillAppear()
+void IMUSensor::onViewWillAppear()
 {
     lv_obj_set_style_opa(root, LV_OPA_TRANSP, 0);
     lv_obj_fade_in(root, 300, 0);
 }
 
-void CandleLight::onViewDidAppear()
+void IMUSensor::onViewDidAppear()
 {
     
 }
 
-void CandleLight::onViewWillDisappear()
+void IMUSensor::onViewWillDisappear()
 {
     lv_obj_fade_out(root, 300, 0);
 }
 
-void CandleLight::onViewDidDisappear()
+void IMUSensor::onViewDidDisappear()
 {
 }
 
-void CandleLight::onViewDidUnload()
+void IMUSensor::onViewDidUnload()
 {
     SetCustomLoadAnimType(PageManager::LOAD_ANIM_OVER_BOTTOM, 500, lv_anim_path_ease_in);
     View.Delete();
     Model.Deinit();
 }
 
-void CandleLight::AttachEvent(lv_obj_t *obj)
+void IMUSensor::AttachEvent(lv_obj_t *obj)
 {
     lv_obj_set_user_data(obj, this);
     lv_obj_add_event_cb(obj, onEvent, LV_EVENT_GESTURE, this);
@@ -69,12 +69,12 @@ void CandleLight::AttachEvent(lv_obj_t *obj)
     lv_obj_clear_flag(obj, LV_OBJ_FLAG_SCROLLABLE);
 }
 
-void CandleLight::Update()
+void IMUSensor::Update()
 {
 
 }
 
-void CandleLight::onTimer(lv_timer_t *timer)
+void IMUSensor::onTimer(lv_timer_t *timer)
 {
 
 }
@@ -82,12 +82,12 @@ void CandleLight::onTimer(lv_timer_t *timer)
 
 
 
-void CandleLight::onEvent(lv_event_t *event)
+void IMUSensor::onEvent(lv_event_t *event)
 {
 
     lv_obj_t *obj = (lv_obj_t *)lv_event_get_target(event);
     lv_event_code_t code = lv_event_get_code(event);
-    CandleLight *instance = (CandleLight *)lv_obj_get_user_data(obj);
+    IMUSensor *instance = (IMUSensor *)lv_obj_get_user_data(obj);
 
     if (obj == instance->root)
     {

@@ -21,21 +21,32 @@
  * SOFTWARE.
  */
 #include <cstdio>
-#include "Config/Config.h"
+
 
 #include "Common/DataProc/DataProc.h"
 #include "Resource/ResourcePool.h"
 #include "Utils/PageManager/PageManager.h"
 
-#include "Pages/AppFactory.hpp"
- 
-#include "Pages/CandleLight/CandleLight.h"
- 
- 
 
-#if CONFIG_MONKEY_TEST_ENABLE
-#include "Utils/lv_monkey/lv_monkey.h"
-#endif
+#include "Pages/AppFactory.hpp"
+
+#include "Pages/IICDiscovery/IICDiscovery.h"
+#include "Pages/AppInfos/AppInfos.h"
+#include "Pages/AppLumia/AppLumia.h"
+#include "Pages/PowerSupply/PowerSupply.h"
+#include "Pages/ServoCtrl/ServoCtrl.h"
+#include "Pages/AnalogViewer/AnalogViewer.h"
+#include "Pages/ColorWheel/ColorWheel.h"
+#include "Pages/DAPLink/DAPLink.h"
+#include "Pages/Interval/Interval.h"
+#include "Pages/UARTViewer/UARTViewer.h"
+#include "Pages/CandleLight/CandleLight.h"
+#include "Pages/Hertz/Hertz.h"
+#include "Pages/IMUSensor/IMUSensor.h"
+#include "Pages/KaitoKey/KaitoKey.h"
+#include "Pages/LogicAnalyzer/LogicAnalyzer.h"
+#include "Pages/PowerList/PowerList.h"
+ 
 
 #define ACCOUNT_SEND_CMD(ACT, CMD)                                         \
     do                                                                     \
@@ -68,8 +79,22 @@
     //StatusBar::Init(lv_layer_top());
     // Lưu ý cần đúng tên class, sai tên load không ra, không chạy
     manager.Install("Startup", "Pages/Startup");
-    manager.Install("CandleLight", "Pages/CandleLight");
+    manager.Install("IICDiscovery", "Pages/IICDiscovery");
+    manager.Install("AppInfos", "Pages/AppInfos");
     manager.Install("AppLumia", "Pages/AppLumia");
+    manager.Install("PowerSupply", "Pages/PowerSupply");
+    manager.Install("ServoCtrl", "Pages/ServoCtrl");
+    manager.Install("AnalogViewer", "Pages/AnalogViewer");
+    manager.Install("ColorWheel", "Pages/ColorWheel");
+    manager.Install("DAPLink", "Pages/DAPLink");
+    manager.Install("Interval", "Pages/Interval");
+    manager.Install("UARTViewer", "Pages/UARTViewer");
+    manager.Install("CandleLight", "Pages/CandleLight");
+    manager.Install("Hertz", "Pages/Hertz");
+    manager.Install("IMUSensor", "Pages/IMUSensor");
+    manager.Install("KaitoKey", "Pages/KaitoKey");
+    manager.Install("LogicAnalyzer", "Pages/LogicAnalyzer");
+    manager.Install("PowerList", "Pages/PowerList");
 
     manager.SetGlobalLoadAnimType(PageManager::LOAD_ANIM_OVER_TOP, 500);
 
