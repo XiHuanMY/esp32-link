@@ -74,7 +74,22 @@ namespace HAL
         PowerPD_stt_t pd_stt;
     } PowerPD_Info_t;
 
-    
+
+
+
+
+    typedef enum Test_cmd
+    {
+        Ts_START = 0,
+        Ts_UPDATE,
+        Ts_STOP,
+    } Test_cmd_t;
+    typedef struct
+    {
+        uint16_t data1;
+        uint16_t data2;
+        Test_cmd_t test_cmd; 
+    } Test_Info_t;
 
     /*RC Servo*/
     typedef enum

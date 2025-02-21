@@ -38,7 +38,7 @@
 #include "Pages/KaitoKey/KaitoKey.h"
 #include "Pages/LogicAnalyzer/LogicAnalyzer.h"
 #include "Pages/PowerList/PowerList.h"
-
+#include "Pages/Test/Test.h"
 #define APP_CLASS_MATCH(className)\
 do{\
     if (strcmp(name, #className) == 0)\
@@ -66,5 +66,6 @@ PageBase *AppFactory::CreatePage(const char *name)
     APP_CLASS_MATCH(KaitoKey);
     APP_CLASS_MATCH(LogicAnalyzer);
     APP_CLASS_MATCH(PowerList);
+    APP_CLASS_MATCH(Test);
     return nullptr;
 }

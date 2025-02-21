@@ -5,11 +5,12 @@
 #include "i2c_manager.h"
 
 #include "Resource/ResourcePool.h"
- #if LV_USE_TFT_ESPI
- #include <TFT_eSPI.h>
- #endif
- 
- #include "APP.h"
+#if LV_USE_TFT_ESPI
+#include <TFT_eSPI.h>
+#endif
+
+#include "APP.h"
+#include "Common/HAL/HAL.h"
 #include "lvgl_indev_port.h"
  
  /*To use the built-in examples and demos of LVGL uncomment the includes below respectively.
@@ -87,6 +88,8 @@
  {
     Serial.begin( 115200 ); 
     
+    HAL::HAL_Init();
+
 
     lv_init();
     /*Set a tick source so that LVGL will know how much time elapsed. */
@@ -106,6 +109,9 @@
     lv_port_indev_init();
 
     Serial.println( "Setup done" );
+
+
+
     App_Init();
   
     lvgl_i2c_read(I2C_NUM_0,0x0d, 0x0d, data, 1);

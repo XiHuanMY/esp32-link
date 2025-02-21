@@ -110,6 +110,10 @@ namespace HAL
     void UART_Update(UART_Info_t *info);
     void UART_Deinit();
 
+    /*test*/
+    void Test_Init();
+    void Test_Update(Test_Info_t *info);
+    //void UART_Deinit();
 }
 
 #endif // !__cplusplus

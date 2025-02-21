@@ -95,10 +95,10 @@
     manager.Install("KaitoKey", "Pages/KaitoKey");
     manager.Install("LogicAnalyzer", "Pages/LogicAnalyzer");
     manager.Install("PowerList", "Pages/PowerList");
-
+    manager.Install("Test", "Pages/Test");
     manager.SetGlobalLoadAnimType(PageManager::LOAD_ANIM_OVER_TOP, 500);
 
-    manager.Push("Pages/Startup");
+    manager.Push("Pages/Test");
 }
 
 extern "C" void App_Uninit()
