@@ -39,11 +39,11 @@ static int onEvent(Account* account, Account::EventParam_t* param)
     switch (info->test_cmd)
     {
         case HAL::Ts_START:
-            HAL::Test_Init();
+            HAL::Test_Init(info);
             break;
 
         case HAL::Ts_UPDATE:
-            //HAL::PowerPD_Update(info);
+            HAL::Test_Update(info);
             break;
 
         case HAL::Ts_STOP:
@@ -58,7 +58,7 @@ static int onEvent(Account* account, Account::EventParam_t* param)
     return 0;
 }
 
-DATA_PROC_INIT_DEF(PowerPD)
+DATA_PROC_INIT_DEF(Test)
 {
     account->SetEventCallback(onEvent);
     account->SetTimerPeriod(100);

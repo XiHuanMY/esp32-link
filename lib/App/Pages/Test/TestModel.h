@@ -12,9 +12,12 @@ class TestModel
 public:
     void Init();
     void Deinit();
-
+    void Update(int cnt);
 private:
     Account* account;
+
+private:
+    static int onEvent(Account *account, Account::EventParam_t *param);
 };
 
 }

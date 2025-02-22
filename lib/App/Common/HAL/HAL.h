@@ -111,7 +111,7 @@ namespace HAL
     void UART_Deinit();
 
     /*test*/
-    void Test_Init();
+    void Test_Init(Test_Info_t *test_info);
     void Test_Update(Test_Info_t *info);
     //void UART_Deinit();
 }

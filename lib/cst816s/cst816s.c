@@ -182,7 +182,7 @@ bool cst816_read(lv_indev_t *drv, lv_indev_data_t *data) {
         data->key = LV_KEY_HOME;
     }
 
-     printf("aaaaa:%u,%u\n",data->point.x, data->point.y);
+     //printf("aaaaa:%u,%u\n",data->point.x, data->point.y);
 
     return false;
 }

@@ -97,7 +97,7 @@
     manager.Install("PowerList", "Pages/PowerList");
     manager.Install("Test", "Pages/Test");
     manager.SetGlobalLoadAnimType(PageManager::LOAD_ANIM_OVER_TOP, 500);
-
+    //manager.Push("Pages/Startup");
     manager.Push("Pages/Test");
 }
 

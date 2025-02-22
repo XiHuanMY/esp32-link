@@ -1,2 +1,2 @@
 /* Data processing node list */
-DP_DEF(Test, 0); 
+DP_DEF(Test, sizeof(HAL::Test_Info_t));

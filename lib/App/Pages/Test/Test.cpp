@@ -26,8 +26,14 @@ void Test::onViewLoad()
      
     Model.Init();
     View.Create(root);
-
     AttachEvent(root);
+    
+    TestView::item_t *item_grp = ((TestView::item_t *)&View.ui);
+
+    for (int i = 0; i < sizeof(View.ui) / sizeof(TestView::item_t); i++)
+    {
+        AttachEvent(item_grp[i].cont);
+    }
 }
 
 void Test::onViewDidLoad()
@@ -61,10 +67,10 @@ void Test::onViewDidUnload()
     Model.Deinit();
 }
 
-void Test::AttachEvent(lv_obj_t *obj)
+ void Test::AttachEvent(lv_obj_t *obj)
 {
     lv_obj_set_user_data(obj, this);
-    lv_obj_add_event_cb(obj, onEvent, LV_EVENT_GESTURE, this);
+    lv_obj_add_event_cb(obj, onEvent, LV_EVENT_ALL, this);
     lv_obj_clear_flag(obj, LV_OBJ_FLAG_GESTURE_BUBBLE);
     lv_obj_clear_flag(obj, LV_OBJ_FLAG_SCROLLABLE);
 }
@@ -84,20 +90,33 @@ void Test::onTimer(lv_timer_t *timer)
 
 void Test::onEvent(lv_event_t *event)
 {
-
+    static uint16_t cnt = 0;
     lv_obj_t *obj = (lv_obj_t *)lv_event_get_target(event);
     lv_event_code_t code = lv_event_get_code(event);
     Test *instance = (Test *)lv_obj_get_user_data(obj);
-
-    if (obj == instance->root)
+    //lv_event_code_t code = lv_event_get_code(event);
+    //lv_obj_t * label = lv_event_get_user_data(event);
+    if (obj == instance->View.ui.botton.cont)
     {
-        if (LV_EVENT_GESTURE == code)
-        {
-            lv_dir_t dir = lv_indev_get_gesture_dir(lv_indev_get_act());
-            if (LV_DIR_RIGHT == dir)
-            {
-                instance->Manager->Pop();
-            }
+        switch(code) {
+            case LV_EVENT_PRESSED:
+                lv_label_set_text(instance->View.ui.lable.cont, "The last button event:\nLV_EVENT_PRESSED");       
+                break;
+            case LV_EVENT_CLICKED:
+                instance->Model.Update(cnt);
+                lv_label_set_text(instance->View.ui.lable.cont, "The last button event:\nLV_EVENT_CLICKED");
+                cnt++;
+                break;
+            case LV_EVENT_LONG_PRESSED:
+                lv_label_set_text(instance->View.ui.lable.cont, "The last button event:\nLV_EVENT_LONG_PRESSED");
+                break;
+            case LV_EVENT_LONG_PRESSED_REPEAT:
+                lv_label_set_text(instance->View.ui.lable.cont, "The last button event:\nLV_EVENT_LONG_PRESSED_REPEAT");
+                break;
+            default:
+                break;
         }
+        
     }
+     
 }

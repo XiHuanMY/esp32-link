@@ -10,35 +10,43 @@
 
 #define TAG "TEST"
 TaskHandle_t test_task_handle = NULL;
- 
+uint16_t data1 = 0;
 extern "C"
 {
 
     static void test_task(void *pvParameter)
     {
         ESP_LOGI(TAG, "test task on \r\n");
-        gpio_set_direction((gpio_num_t)45, GPIO_MODE_OUTPUT);
-        gpio_set_level((gpio_num_t)45, 0);
-
- 
+        //gpio_set_direction((gpio_num_t)45, GPIO_MODE_OUTPUT);
+        //gpio_set_level((gpio_num_t)45, 0);
         while (1)
         {
             /* code */
- 
-            vTaskDelay(5);
+            printf("data : %d\r\n", data1);
+            vTaskDelay(1000);
         }
-        }
+    }
 }
 
-void HAL::Test_Init()
+void HAL::Test_Init(Test_Info_t *test_info)
 {
-    ESP_LOGI(TAG, "power_pd_c init \r\n");
+    data1 = test_info->data1;
     xTaskCreate(test_task, "test_task", 1024 * 8, NULL, 8, &test_task_handle);
 }
  
  
 void HAL::Test_Update(Test_Info_t *test_info)
 {
-  
+    switch (test_info->test_cmd)
+    {
+        case Ts_UPDATE:
+        {
+            data1 = test_info->data1;
+            break;
+        }
+        default:
+            break;
+
+    }
 }
  

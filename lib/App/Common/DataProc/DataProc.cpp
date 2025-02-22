@@ -13,7 +13,7 @@ void DataProc_Init()
     Account* act##NODE_NAME = new Account(#NODE_NAME, &center, BUFFER_SIZE);
 #  include "DP_LIST.inc"
 #undef DP_DEF
-/*
+ 
 #define DP_DEF(NODE_NAME, BUFFER_SIZE)\
 do{\
     DATA_PROC_INIT_DEF(NODE_NAME);\
@@ -21,5 +21,5 @@ do{\
 }while(0)
 #  include "DP_LIST.inc"
 #undef DP_DEF
-*/
+ 
 }
