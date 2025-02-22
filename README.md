@@ -6,11 +6,17 @@
 VScode+platfromIO插件
 
 [env:esp32-s3-devkitc-1]
+
 platform = espressif32
+
 board = esp32-s3-devkitc-1
+
 framework = arduino
+
 lib_deps = 
+
 	lvgl/lvgl@^9.2.2
+ 
 	bodmer/TFT_eSPI@^2.5.43
 # 硬件配置
 - 1.主控: ESP32S3 (主频:240MHz)
@@ -34,8 +40,12 @@ lib_deps =
 开发中...
 # 文档
 笔记一 https://www.cnblogs.com/moyuu/p/18722264
+
 笔记二 https://www.cnblogs.com/moyuu/p/18723774
+
 笔记三在写了...
 # 致谢
 感谢@[obitvn](https://github.com/obitvn/felini-firmware/tree/41be0903c2268b9ea327d9d93401362f00cf73b6 "obitvn")大佬的硬件原理和3D模型
+
+
 感谢@[FASTSHIFT](https://github.com/FASTSHIFT/X-TRACK "FASTSHIFT")大佬的LVGL页面切换管理和数据订阅管理
