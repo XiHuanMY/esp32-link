@@ -5,18 +5,12 @@
 # 开发环境
 VScode+platfromIO插件
 
-[env:esp32-s3-devkitc-1]
-
-platform = espressif32
-
-board = esp32-s3-devkitc-1
-
-framework = arduino
-
-lib_deps = 
-
+	[env:esp32-s3-devkitc-1]
+	platform = espressif32
+	board = esp32-s3-devkitc-1
+	framework = arduino
+	lib_deps = 
 	lvgl/lvgl@^9.2.2
- 
 	bodmer/TFT_eSPI@^2.5.43
 # 硬件配置
 - 1.主控: ESP32S3 (主频:240MHz)
