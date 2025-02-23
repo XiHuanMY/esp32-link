@@ -38,6 +38,7 @@ public:
         item_t logicanalyzer;
         item_t setting;
         item_t powerlist;
+        item_t test;
     } ui;
 
 public:
