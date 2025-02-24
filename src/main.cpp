@@ -50,8 +50,7 @@ void setup()
     lvgl_i2c_read(I2C_NUM_0,0x22, 0x01, data, 1);
     printf("pd id : 0x%x\r\n",data[0]);
     
-    uint8_t val =0x40;
-    lvgl_i2c_read(I2C_NUM_0,0x60,0.00, data, 1);
+    lvgl_i2c_read(I2C_NUM_0,0x60,0x00, data, 1);
     printf("pcf id1 : 0x%x\r\n",data[0]);
 
     lvgl_i2c_read(I2C_NUM_0,0x40, 0xff, data, 1);
