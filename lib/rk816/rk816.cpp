@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include "rk816.h"
 #include <stdio.h>
 #include "esp_log.h"
@@ -329,9 +330,13 @@ bool rk816_rtc_set_time(int second, int minute, int hour, int day, int month, in
 
 	uint8_t val = 0;
 
-	rk816_reg_read( RK816_RTC_CTRL_REG, &val);
-	val |= (0x1 << 0);
-	rk816_reg_write( RK816_RTC_CTRL_REG, val);
+	/* Stop RTC while updating the TC registers */
+	rk816_reg_read( RK816_RTC_CTRL_REG,&val);
+ 
+
+	val = val | 0x01;
+	rk816_reg_write(RK816_RTC_CTRL_REG, val);
+	 
 
 	rk816_reg_write( RK816_SECONDS_REG, bin2bcd(second));
 	rk816_reg_write( RK816_MINUTES_REG, bin2bcd(minute));
@@ -342,26 +347,21 @@ bool rk816_rtc_set_time(int second, int minute, int hour, int day, int month, in
 	rk816_reg_write( RK816_WEEKS_REG, bin2bcd(week));
 
 	rk816_reg_read( RK816_RTC_CTRL_REG, &val);
-	val &= ~(0x1 << 0);
-	rk816_reg_write( RK816_RTC_CTRL_REG, val);
-
+ 
+	val = val & (~0x01);
+	rk816_reg_write(RK816_RTC_CTRL_REG, val);
 	return true;
 }
 
 bool rk816_rtc_get_time(int *second, int *minute, int *hour, int *day, int *month, int *year, int *week)
 {
 	uint8_t val = 0;
-
-	val |= (0x1 << 1);
-	rk816_reg_write( RK816_RTC_CTRL_REG, val);
-
 	rk816_reg_read( RK816_RTC_CTRL_REG, &val);
-	val &= ~(0x1 << 6);
-	rk816_reg_write( RK816_RTC_CTRL_REG, val);
+ 	 
 
-	rk816_reg_read( RK816_RTC_CTRL_REG, &val);
-	val |= (0x1 << 6) | (0x1 << 7);
-	rk816_reg_write( RK816_RTC_CTRL_REG, val);
+	val = val & (~0x80);
+	rk816_reg_write(RK816_RTC_CTRL_REG, val);
+ 
 
 	rk816_reg_read( RK816_SECONDS_REG, &val);
 	*second = bcd2bin(val & 0x7f);
@@ -385,6 +385,7 @@ bool rk816_rtc_get_time(int *second, int *minute, int *hour, int *day, int *mont
 void rk816_init_power(void)
 {
 	// read version
+
 	uint8_t data[2];
 	lvgl_i2c_read(I2C_NUM_0, RK816_DEFAULT_I2C_ADDRESS, RK816_CHIP_NAME_REG, data, 2);
 	//rk816_reg_read(RK816_CHIP_NAME_REG, data);
@@ -406,10 +407,6 @@ void rk816_init_power(void)
 	// rk816_reg_write( RK816_DEV_CTRL_REG, 0b01001001); // : DEVICE CONTROL REGISTER
 
 	printf("power on source %x\r\n", rk816_bat_read(RK816_ON_SOURCE_REG));
-	
-
-
-	
 	printf("dcdc1 %d, dcdc2 %d, dcdc3 %d,\r\n dcdc4 %d, ldo1 %d, ldo2 %d,\r\n ldo3 %d, ldo4 %d, ldo5 %d, ldo6 %d\r\n", 
 	chanel[1], chanel[2], chanel[3], chanel[4],
 	chanel[5], chanel[6], chanel[7], chanel[8],
@@ -426,5 +423,10 @@ void rk816_init_power(void)
 	regulator_rk816_set_enable(RK816_LDO2, true);
 	regulator_rk816_set_enable(RK816_LDO3, true);
 	regulator_rk816_set_enable(RK816_LDO4, true);
+
+ 
+	rk816_rtc_set_time(12, 45, 14, 8, 3, 2025, 36);
+
+ 	 
 }
 

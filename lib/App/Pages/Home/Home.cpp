@@ -28,12 +28,7 @@ void Home::onViewLoad()
     View.Create(root);
     AttachEvent(root);
     
-    HomeView::item_t *item_grp = ((HomeView::item_t *)&View.ui);
-
-    for (int i = 0; i < sizeof(View.ui) / sizeof(HomeView::item_t); i++)
-    {
-        AttachEvent(item_grp[i].cont);
-    }
+ 
 }
 
 void Home::onViewDidLoad()
@@ -96,28 +91,7 @@ void Home::onEvent(lv_event_t *event)
     Home *instance = (Home *)lv_obj_get_user_data(obj);
     //lv_event_code_t code = lv_event_get_code(event);
     //lv_obj_t * label = lv_event_get_user_data(event);
-    if (obj == instance->View.ui.botton.cont)
-    {
-        switch(code) {
-            case LV_EVENT_PRESSED:
-                lv_label_set_text(instance->View.ui.lable.cont, "The last button event:\nLV_EVENT_PRESSED");       
-                break;
-            case LV_EVENT_CLICKED:
-                instance->Model.Update(cnt);
-                lv_label_set_text(instance->View.ui.lable.cont, "The last button event:\nLV_EVENT_CLICKED");
-                cnt++;
-                break;
-            case LV_EVENT_LONG_PRESSED:
-                lv_label_set_text(instance->View.ui.lable.cont, "The last button event:\nLV_EVENT_LONG_PRESSED");
-                break;
-            case LV_EVENT_LONG_PRESSED_REPEAT:
-                lv_label_set_text(instance->View.ui.lable.cont, "The last button event:\nLV_EVENT_LONG_PRESSED_REPEAT");
-                break;
-            default:
-                break;
-        }
-        
-    }
+ 
 
     if (obj == instance->root)
     {

@@ -9,8 +9,8 @@ void HomeModel::Init()
     account->SetEventCallback(onEvent);
 
 
-    HAL::Test_Info_t info_val;
-    info_val.test_cmd = HAL::Ts_START;
+    HAL::Home_Info_t info_val;
+    info_val.home_cmd = HAL::HM_START;
     info_val.data1 = 5000;
      
     account->Notify("Home", &info_val, sizeof(info_val));
@@ -27,9 +27,5 @@ int HomeModel::onEvent(Account *account, Account::EventParam_t *param)
 
 void HomeModel::Update(int cnt)
 {
-    HAL::Test_Info_t info_val;
-    info_val.test_cmd = HAL::Ts_UPDATE;
-    info_val.data1 = cnt;
-    printf("data1 = %d\n", cnt);
-    account->Notify("Home", &info_val, sizeof(info_val));
+ 
 }

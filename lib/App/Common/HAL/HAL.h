@@ -114,6 +114,10 @@ namespace HAL
     void Test_Init(Test_Info_t *test_info);
     void Test_Update(Test_Info_t *info);
     //void UART_Deinit();
+    /*time*/
+    void Home_Init(Home_Info_t *home_info);
+    void Home_Update(Home_Info_t *info);
+    //void UART_Deinit();
 }
 
 #endif // !__cplusplus

@@ -75,8 +75,18 @@ namespace HAL
     } PowerPD_Info_t;
 
 
-
-
+    typedef enum Home_cmd
+    {
+        HM_START = 0,
+        HM_UPDATE,
+        HM_STOP,
+    } Home_cmd_t;
+    typedef struct
+    {
+        uint16_t data1;
+        uint16_t data2;
+        Home_cmd_t home_cmd; 
+    } Home_Info_t;
 
     typedef enum Test_cmd
     {
