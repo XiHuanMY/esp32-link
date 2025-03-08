@@ -58,7 +58,8 @@ void Startup::onTimer(lv_timer_t *timer)
 {
     Startup *instance = (Startup *)timer->user_data;
     // instance->Manager->Replace("Pages/AppInfos");
-    instance->Manager->Replace("Pages/AppLumia");
+    //instance->Manager->Replace("Pages/Home");
+    instance->Manager->Replace("Pages/Home");
 }
 
 void Startup::onEvent(lv_event_t *event)

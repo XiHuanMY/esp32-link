@@ -112,7 +112,17 @@ void AppLumia::onEvent(lv_event_t *event)
     //         }
     //     }
     // }
-
+    if (obj == instance->root)
+    {
+        if (LV_EVENT_GESTURE == code)
+        {
+            lv_dir_t dir = lv_indev_get_gesture_dir(lv_indev_get_act());
+            if (LV_DIR_RIGHT == dir)
+            {
+                instance->Manager->Pop();
+            }
+        }
+    }
     for (int i = 0; i < sizeof(instance->View.ui) / sizeof(AppLumiaView::item_t); i++)
     {
         if ((obj == item_grp[i].btn) || (obj == item_grp[i].btn_cell))
@@ -123,4 +133,5 @@ void AppLumia::onEvent(lv_event_t *event)
             }
         }
     }
+
 }

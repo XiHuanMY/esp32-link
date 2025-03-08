@@ -46,7 +46,8 @@
 #include "Pages/KaitoKey/KaitoKey.h"
 #include "Pages/LogicAnalyzer/LogicAnalyzer.h"
 #include "Pages/PowerList/PowerList.h"
- 
+#include "Pages/Home/Home.h"
+
 
 #define ACCOUNT_SEND_CMD(ACT, CMD)                                         \
     do                                                                     \
@@ -96,6 +97,7 @@
     manager.Install("LogicAnalyzer", "Pages/LogicAnalyzer");
     manager.Install("PowerList", "Pages/PowerList");
     manager.Install("Test", "Pages/Test");
+    manager.Install("Home", "Pages/Home");
     manager.SetGlobalLoadAnimType(PageManager::LOAD_ANIM_OVER_TOP, 500);
     //manager.Push("Pages/Startup");
     manager.Push("Pages/Startup");
