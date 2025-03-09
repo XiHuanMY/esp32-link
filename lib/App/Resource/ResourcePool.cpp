@@ -72,6 +72,7 @@ extern "C"
         IMPORT_IMG(canbus);
         //IMPORT_IMG(pin_color_wheel);
         IMPORT_IMG(catb);
+        //IMPORT_IMG(car);
     }
 
 } /* extern "C" */
