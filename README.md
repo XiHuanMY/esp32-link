@@ -31,7 +31,8 @@ VScode+platfromIO插件
 - 16.电池: Li-ion 3.7V 683030 700mAh
 - 17.外壳: 3D打印
 # 功能
-开发中...
+ina226电压检测 -ok
+pcnt ledc     -ok
 # 文档
 笔记一 https://www.cnblogs.com/moyuu/p/18722264
 
