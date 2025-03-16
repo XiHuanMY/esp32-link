@@ -74,7 +74,7 @@ void setup()
 
 
     // 初始化 Lottie 动画
-    lv_obj_t * lottie_obj = lv_rlottie_create_from_raw(lottie_screen, 60, 60, (const char*)car);
+    lv_obj_t * lottie_obj = lv_rlottie_create_from_raw(lottie_screen, 200, 200, (const char*)car);
     lv_obj_center(lottie_obj);
     
     printf("Arduino Stack was set to %d bytes", getArduinoLoopTaskStackSize());
