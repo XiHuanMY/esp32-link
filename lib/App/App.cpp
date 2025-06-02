@@ -99,9 +99,9 @@
     manager.Install("Test", "Pages/Test");
     manager.Install("Home", "Pages/Home");
     manager.SetGlobalLoadAnimType(PageManager::LOAD_ANIM_OVER_TOP, 500);
+    manager.Push("Pages/Startup");
     //manager.Push("Pages/Startup");
-    //manager.Push("Pages/Startup");
-    manager.Push("Pages/Home");
+    //manager.Push("Pages/Home");
 }
 
 extern "C" void App_Uninit()
